@@ -5,7 +5,13 @@
       "Bash(npm audit:*)",
       "Bash(npm run build:*)",
       "Bash(npx prisma generate:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npx prisma:*)",
+      "Bash(node:*)",
+      "Bash(npm install:*)",
+      "Bash(NEXT_SWRC=false npm run dev)",
+      "Bash(npx next build:*)",
+      "Bash(npm run:*)"
     ],
     "deny": []
   }

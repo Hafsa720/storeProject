@@ -4,7 +4,7 @@ import db from '@/utils/db';
 import { redirect } from 'next/navigation';
 
 export const FetchProducts=async()=>{
- const products=db.product.findMany({
+ const products=await db.product.findMany({
   where:{
    featured:true
   },

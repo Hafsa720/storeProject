@@ -24,7 +24,7 @@ function HeroCarousel() {
 return <CarouselItem key={index} >
 <Card>
   <CardContent>
-    <Image src={image} alt='hero' className='w-full h-[24rem] rounded-md object-cover'/>
+    <Image src={image} alt='hero' width={800} height={400} className='w-full h-[24rem] rounded-md object-cover'/>
   </CardContent>
 </Card>
 </CarouselItem>
