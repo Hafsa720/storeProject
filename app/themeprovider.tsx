@@ -1,37 +1,11 @@
 
-import React from 'react'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Navbar from '@/components/navbar/navbar/Navbar'
-import ThemeProvider from '@/app/themeprovider'
-import Container from '@/components/global/Container'
-import { ClerkProvider } from '@clerk/nextjs'
-import { Toaster } from 'sonner'
+'use client'
 
-const inter = Inter({ subsets: ['latin'] })
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { ComponentProps } from 'react'
 
-export const metadata: Metadata = {
-  title: 'next storeFront',
-  description: 'A nifty storefront built with Next.js',
-}
+type ThemeProviderProps = ComponentProps<typeof NextThemesProvider>
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <ClerkProvider>
-      <html lang='en' suppressHydrationWarning>
-        <body className={inter.className}>
-          <ThemeProvider>
-            <Toaster />
-            <Navbar />
-            <Container className='flex flex-col'>{children}</Container>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  )
+export default function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

@@ -1,3 +1,5 @@
+'use server'
+
 import db from '@/utils/db';
 import { redirect } from 'next/navigation';
 

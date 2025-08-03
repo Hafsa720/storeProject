@@ -5,6 +5,7 @@ import Navbar from '@/components/navbar/navbar/Navbar'
 import ThemeProvider from '@/app/themeprovider'
 import Container from '@/components/global/Container'
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +23,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en' suppressHydrationWarning>
         <body className={inter.className}>
-          <ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster />
             <Navbar />
             <Container className='flex flex-col'>{children}</Container>
           </ThemeProvider>

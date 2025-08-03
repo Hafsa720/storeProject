@@ -8,11 +8,13 @@ import {
 } from '@/components/ui/carousel'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
-import hero1 from '@/public/images/hero1.jpg'
-import hero2 from '@/public/images/hero2.jpg'
-import hero3 from '@/public/images/hero3.jpg'
-import hero4 from '@/public/images/hero4.jpg'
-const Images=[hero1, hero2, hero3, hero4]
+
+const Images = [
+  '/images/hero1.jpg',
+  '/images/hero2.jpg', 
+  '/images/hero3.jpg',
+  '/images/hero4.jpg'
+]
 function HeroCarousel() {
   return (
     <div className='hidden lg:block'>
