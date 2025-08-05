@@ -1,19 +1,21 @@
+'use client'
 import React, { use } from 'react'
-import Link from 'next/link'
+
+import { useRouter } from 'next/navigation'
 import { useToaster } from '@/components/ui/sonner'
 
 import { SignOutButton } from '@clerk/nextjs'
-function SignOutLink() {
+const SignOutLink = () => {
+  const router = useRouter()
   const { toast } = useToaster()
 
   const handleSignOut = () => {
     toast('logout Successfully')
+    router.push('/')
   }
   return (
     <SignOutButton>
-      <Link href='/' className='w-full text-left' onClick={handleSignOut}>
-        Logout
-      </Link>
+      <button onClick={handleSignOut}>Signout</button>
     </SignOutButton>
   )
 }
