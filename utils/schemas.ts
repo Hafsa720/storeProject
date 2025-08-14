@@ -15,6 +15,7 @@ export const productSchema = z.object({
   },{
    message: 'description must be between 10 and 500 characters long',
   }),
+  featured: z.coerce.boolean().optional().default(false),
 })
 export const imageSchema=z.object({
  image:validateImageFile()

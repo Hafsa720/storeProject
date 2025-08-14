@@ -73,6 +73,9 @@ export const CreateProductAction = async (
     const rawData = Object.fromEntries(formData)
     const file = formData.get('image') as File
     const validatedData = validateWithZodSchema(productSchema, rawData)
+    if ('error' in validatedData) {
+      return { message: validatedData.error }
+    }
     const validatedImage = validateWithZodSchema(imageSchema, { image: file })
     if ('error' in validatedImage) {
       return { message: validatedImage.error }
