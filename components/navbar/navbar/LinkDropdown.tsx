@@ -12,9 +12,11 @@ import { links } from '@/utils/Links'
 import UserIcon from './UserIcon'
 import { SignedIn, SignedOut, SignInButton,SignUpButton } from '@clerk/nextjs'
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu'
+import {auth} from '@clerk/nextjs/server'
 import SignOutLink from './SignOutLink'
 
 function LinkDropdown() {
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,6 +43,7 @@ function LinkDropdown() {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
+            
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className='capitalize w-full'>

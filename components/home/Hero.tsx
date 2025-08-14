@@ -14,10 +14,10 @@ function Hero() {
           inventore itaque quia similique veniam optio praesentium incidunt
         </p>
         <Button asChild size='lg' className='mt-10'>
-<Link href='/products'>Our Products</Link>
+          <Link href='/products'>Our Products</Link>
         </Button>
       </div>
-      <HeroCarousel/>
+      <HeroCarousel />
     </section>
   )
 }

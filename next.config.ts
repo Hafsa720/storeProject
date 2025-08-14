@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.clerk.com',
       },
+      {
+        protocol: 'https',
+        hostname:'https://fcjjjdleknisnmpxwzih.supabase.co'
+      }
     ],
   },
   serverExternalPackages: ['@prisma/client'],

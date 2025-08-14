@@ -20,7 +20,7 @@ export default clerkMiddleware(async (auth, req) => {
 
   // Check admin routes
   if (isAdminRoute(req)) {
-    const isAdminUser = userId === process.env.ADMIN_USER_ID
+    const isAdminUser =  userId === process.env.ADMIN_USER_ID
     if (!isAdminUser) {
       return NextResponse.redirect(new URL('/', req.url))
     }

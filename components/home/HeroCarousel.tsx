@@ -11,27 +11,36 @@ import Image from 'next/image'
 
 const Images = [
   '/images/hero1.jpg',
-  '/images/hero2.jpg', 
+  '/images/hero2.jpg',
   '/images/hero3.jpg',
-  '/images/hero4.jpg'
+  '/images/hero4.jpg',
 ]
 function HeroCarousel() {
   return (
     <div className='hidden lg:block'>
       <Carousel>
-<CarouselContent>
-  {Images.map((image,index)=>{
-return <CarouselItem key={index} >
-<Card>
-  <CardContent>
-    <Image src={image} alt='hero' width={800} height={400} className='w-full h-[24rem] rounded-md object-cover'/>
-  </CardContent>
-</Card>
-</CarouselItem>
-  })}
-</CarouselContent>
-<CarouselPrevious/>
-<CarouselNext/>
+        <CarouselContent>
+          {Images.map((image, index) => {
+            return (
+              <CarouselItem key={index}>
+                <Card>
+                  <CardContent>
+                    <Image
+                      src={image}
+                      alt='hero'
+                      width={800}
+                      height={400}
+                      className='w-full h-[24rem] rounded-md object-cover'
+                      priority
+                    />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            )
+          })}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
     </div>
   )
