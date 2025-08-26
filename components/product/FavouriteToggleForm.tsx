@@ -1,9 +1,29 @@
-import React from 'react'
+'use client'
 
-function FavouriteToggleForm() {
-  return (
-    <div>FavouriteToggleForm</div>
-  )
+import { usePathname } from 'next/navigation'
+import FormContainer from '../form/FormContainer'
+import { toggleFavoriteAction } from '@/utils/actions'
+import { SubmitButton } from '@/components/form/Button'
+
+type FavoriteToggleFormProps = {
+  productId: string
+  favoriteId: string | null
 }
 
-export default FavouriteToggleForm
+function FavoriteToggleForm({
+  productId,
+  favoriteId,
+}: FavoriteToggleFormProps) {
+  const pathname = usePathname()
+  const toggleAction = toggleFavoriteAction.bind(null, {
+    productId,
+    favoriteId,
+    pathname,
+  })
+  return (
+    <FormContainer action={toggleAction}>
+      <SubmitButton favorite={favoriteId ? true : false} />
+    </FormContainer>
+  )
+}
+export default FavoriteToggleForm

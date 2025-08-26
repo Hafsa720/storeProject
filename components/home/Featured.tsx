@@ -6,7 +6,9 @@ import ProductsGrid from '../product/ProductsGrid'
 
 async function Featured() {
   const products = await FetchProducts()
+
   if (products.length === 0) return <EmptyList />
+
   return (
     <section className='pt-24'>
       <SectionTitle text='Featured Products' />

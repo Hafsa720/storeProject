@@ -20,3 +20,11 @@ export type CartState = {
   tax: number
   orderTotal: number
 }
+export type Product = {
+  id: string
+  name: string
+  price: number
+  image: string
+  company: string
+  // Add other fields as needed
+}

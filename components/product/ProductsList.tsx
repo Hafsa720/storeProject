@@ -1,10 +1,12 @@
 import React from 'react'
-import { formatCurrency } from '@/utils/format'
 import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
-import { Product } from '@prisma/client'
 import Image from 'next/image'
+import { formatCurrency } from '@/utils/format'
+import { Card, CardContent } from '@/components/ui/card'
+import { Product } from '@/utils/types'
 import FavouriteToggleButton from './FavouriteToggleButton'
+
+// ...existing code...
 function ProductsList({ products }: { products: Product[] }) {
   return (
     <div>
