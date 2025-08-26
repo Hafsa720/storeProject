@@ -13,8 +13,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname:'https://fcjjjdleknisnmpxwzih.supabase.co'
-      }
+        hostname: 'fcjjjdleknisnmpxwzih.supabase.co',
+        // allow any files served from the public storage path
+        pathname: '/storage/v1/object/public/**',
+      },
     ],
   },
   serverExternalPackages: ['@prisma/client'],
