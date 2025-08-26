@@ -1,17 +1,10 @@
-import React from 'react'
 import EmptyList from '@/components/global/EmptyList'
 import { fetchAdminProducts } from '@/utils/actions'
 import Link from 'next/link'
-import { formatCurrency } from '@/utils/format'
 import FormContainer from '@/components/form/FormContainer'
-type AdminProduct = {
-  id: string
-  name: string
-  company: string
-  price: number
-  description: string
-}
-
+import { IconButton } from '@/components/form/Button'
+import { deleteProductAction } from '@/utils/actions'
+import { formatCurrency } from '@/utils/format'
 import {
   Table,
   TableBody,
@@ -21,57 +14,41 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { IconButton } from '@/components/form/Button'
 
-async function AdminProductspage() {
-  const products = await fetchAdminProducts()
-
-  if (!products || products.length === 0) {
-    return <EmptyList heading='No products found' />
-  }
-
+async function ItemsPage() {
+  const items = await fetchAdminProducts()
+  if (items.length === 0) return <EmptyList />
   return (
     <section>
       <Table>
         <TableCaption className='capitalize'>
-          total products: {products.length}
+          total products : {items.length}
         </TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className='w-[100px]'>ID</TableHead>
-            <TableHead>Name</TableHead>
+            <TableHead>Product Name</TableHead>
             <TableHead>Company</TableHead>
             <TableHead>Price</TableHead>
-            <TableHead>Description</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {products.map((product: AdminProduct) => {
-            const { id, name, company, price, description } = product
+          {items.map((item) => {
+            const { id: productId, name, company, price } = item
             return (
-              <TableRow key={id}>
-                <TableCell>{id}</TableCell>
+              <TableRow key={productId}>
                 <TableCell>
                   <Link
-                    href={`/products/${id}`}
+                    href={`/products/${productId}`}
                     className='underline text-muted-foreground tracking-wide capitalize'
                   >
                     {name}
                   </Link>
                 </TableCell>
-                <TableCell className='capitalize'>{company}</TableCell>
+                <TableCell>{company}</TableCell>
                 <TableCell>{formatCurrency(price)}</TableCell>
 
-                <TableCell className='flex items-center gap-x-2'>
-                  <Link
-                    href={`/admin/products/${id}/edit`}
-                    className='text-blue-500 underline'
-                  >
-                    <IconButton actionType='edit'/>
-                  </Link>
-<DeleteProduct productId={id} />
-                </TableCell>
+                <TableCell className='flex items-center gap-x-2'></TableCell>
               </TableRow>
             )
           })}
@@ -81,15 +58,4 @@ async function AdminProductspage() {
   )
 }
 
-// Import the deleteProductAction function from your actions utility
-import { deleteProductAction } from '@/utils/actions'
-
-function DeleteProduct({ productId }: { productId: string }) {
-  const deleteProduct = deleteProductAction.bind(null, { productId })
-  return (
-    <FormContainer action={deleteProduct}>
-      <IconButton actionType='delete' />
-    </FormContainer>
-  )
-}
-export default AdminProductspage
+export default ItemsPage

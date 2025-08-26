@@ -2134,7 +2134,7 @@ import { cn } from '@/lib/utils'
 import { SignInButton } from '@clerk/nextjs'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { LuTrash2, LuPenSquare } from 'react-icons/lu'
-
+s
 type btnSize = 'default' | 'lg' | 'sm'
 
 type SubmitButtonProps = {

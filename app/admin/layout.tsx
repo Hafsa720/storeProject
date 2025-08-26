@@ -1,6 +1,6 @@
 import { Separator } from '@/components/ui/separator'
 import React from 'react'
-import Sidebar from './Sidebar'
+import Sidebar from './sidebar'
 
 function DashboardLayout({children}:{children:React.ReactNode}) {
   return (
