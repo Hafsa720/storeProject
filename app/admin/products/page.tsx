@@ -3,7 +3,7 @@ import EmptyList from '@/components/global/EmptyList'
 import { fetchAdminProducts } from '@/utils/actions'
 import Link from 'next/link'
 import { formatCurrency } from '@/utils/format'
-
+import FormContainer from '@/components/form/FormContainer'
 type AdminProduct = {
   id: string
   name: string
@@ -21,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { IconButton } from '@/components/form/Button'
 
 async function AdminProductspage() {
   const products = await fetchAdminProducts()
@@ -61,14 +62,15 @@ async function AdminProductspage() {
                 </TableCell>
                 <TableCell className='capitalize'>{company}</TableCell>
                 <TableCell>{formatCurrency(price)}</TableCell>
-                <TableCell>{description}</TableCell>
-                <TableCell>
+
+                <TableCell className='flex items-center gap-x-2'>
                   <Link
-                    href={`/admin/products/edit/${id}`}
+                    href={`/admin/products/${id}/edit`}
                     className='text-blue-500 underline'
                   >
-                    Edit
+                    <IconButton actionType='edit'/>
                   </Link>
+<DeleteProduct productId={id} />
                 </TableCell>
               </TableRow>
             )
@@ -79,4 +81,15 @@ async function AdminProductspage() {
   )
 }
 
+// Import the deleteProductAction function from your actions utility
+import { deleteProductAction } from '@/utils/actions'
+
+function DeleteProduct({ productId }: { productId: string }) {
+  const deleteProduct = deleteProductAction.bind(null, { productId })
+  return (
+    <FormContainer action={deleteProduct}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  )
+}
 export default AdminProductspage
