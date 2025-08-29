@@ -10,7 +10,7 @@ function Sidebar() {
   const router = useRouter()
 
   return (
-    <aside className='w-full space-y-2 p-4'>
+    <aside className='w-full  p-4'>
       {adminLinks.map((link) => {
         const isActive = pathname === link.href
 

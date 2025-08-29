@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { SignInButton } from '@clerk/nextjs'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
-import {  LuTrash2 } from 'react-icons/lu'
+import { LuTrash2 } from 'react-icons/lu'
 
 type btnSize = 'default' | 'lg' | 'sm'
 
@@ -15,14 +15,13 @@ type SubmitButtonProps = {
   className?: string
   text?: string
   size?: btnSize
-  favorite?:boolean
+  favorite?: boolean
 }
 
 export function SubmitButton({
   className = '',
   text = 'submit',
   size = 'lg',
-  favorite=true,
 }: SubmitButtonProps) {
   const { pending } = useFormStatus()
 
@@ -46,27 +45,31 @@ export function SubmitButton({
 }
 type actionType = 'edit' | 'delete'
 
-export const IconButton = ({actionType}: {actionType: actionType}) => {
+export const IconButton = ({ actionType }: { actionType: actionType }) => {
   const { pending } = useFormStatus()
   const renderIcon = () => {
     switch (actionType) {
       case 'edit':
-        return <FaHeart />;
+        return <FaHeart />
       case 'delete':
-        return <LuTrash2 />;
+        return <LuTrash2 />
       default:
-        const never: never = actionType;
-        throw new Error(`Unknown action type: ${never}`);
+        const never: never = actionType
+        throw new Error(`Unknown action type: ${never}`)
     }
-  };
+  }
 
   return (
-    <Button type='submit' size='icon' variant='link' className='p-2 cursor-pointer'>
+    <Button
+      type='submit'
+      size='icon'
+      variant='link'
+      className='p-2 cursor-pointer'
+    >
       {pending ? <ReloadIcon className='h-4 w-4 animate-spin' /> : renderIcon()}
     </Button>
-  );
+  )
 }
-
 
 export const CardSignInButton = () => {
   return (

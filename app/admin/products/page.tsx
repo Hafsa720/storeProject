@@ -17,6 +17,7 @@ import {
 
 async function ItemsPage() {
   const items = await fetchAdminProducts()
+  //const items: any = []
   if (items.length === 0) return <EmptyList />
   return (
     <section>
@@ -33,7 +34,7 @@ async function ItemsPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {items.map((item) => {
+          {items?.map((item: any) => {
             const { id: productId, name, company, price } = item
             return (
               <TableRow key={productId}>
