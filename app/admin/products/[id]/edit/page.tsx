@@ -7,7 +7,13 @@ import { SubmitButton } from '@/components/form/Button'
 import CheckboxInput from '@/components/form/CheckBoxInput'
 import ImageInputContainer from '@/components/form/ImageInputContainer'
 
-async function EditProductPage({ params }: { params: { id: string } }) {
+
+interface PageProps {
+  params: {
+    id: string
+  }
+}
+async function EditProductPage({ params }: PageProps)  {
   const { id } = params
   const product = await fetchAdminProductDetails(id)
   const { name, company, description, featured, price } = product
