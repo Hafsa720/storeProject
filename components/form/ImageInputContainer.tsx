@@ -18,12 +18,11 @@ type ImageInputContainerProps = {
 }
 function ImageInputContainer({
   image,
-  name,
   action,
   text,
   children,
 }: ImageInputContainerProps) {
-  const [isUpdateFormVisisble, setIsUpdateFormVisible] = useState(false)
+  const [isUpdateFormVisisble] = useState(false)
 
   return (
     <div>

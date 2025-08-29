@@ -1,7 +1,7 @@
 'use client'
-import React, { use, useActionState } from 'react'
+import React, {  useActionState } from 'react'
 
-import { useFormState } from 'react-dom'
+
 import { useEffect } from 'react'
 import { useToaster } from '@/components/ui/sonner'
 import { actionFunction } from '@/utils/types'
@@ -16,7 +16,7 @@ function FormContainer({action,children}: {action: actionFunction, children: Rea
     if (state.message) {
       toast(state.message)
     }
-  },[state])
+  },[state,toast])
   return <form action={formAction} className='w-full'>
     {children}
   </form>}

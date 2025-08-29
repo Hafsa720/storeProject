@@ -1,13 +1,12 @@
 'use client'
 import React from 'react'
-import { adminLinks } from'@/utils/Links'
+import { adminLinks } from '@/utils/Links'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 
 function Sidebar() {
   const pathname = usePathname()
-  const router = useRouter()
 
   return (
     <aside className='w-full  p-4'>

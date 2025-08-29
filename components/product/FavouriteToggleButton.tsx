@@ -10,8 +10,6 @@ function FavouriteToggleButton({ productsId }: { productsId: string }) {
   const { user } = useUser() // client-side user
   const userId = user?.id
 
-  if (!userId) return <CardSignInButton />
-
   const [favoriteId, setFavouriteId] = React.useState<string | null>(null)
 
   React.useEffect(() => {
@@ -21,6 +19,7 @@ function FavouriteToggleButton({ productsId }: { productsId: string }) {
     }
     fetchFavourite()
   }, [productsId])
+  if (!userId) return <CardSignInButton />
 
   return <FavouriteToggleForm favoriteId={favoriteId} productId={productsId} />
 }

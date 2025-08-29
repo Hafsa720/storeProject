@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import FormContainer from '../form/FormContainer'
 import { toggleFavoriteAction } from '@/utils/actions'
-import { CardSubmitButton, SubmitButton } from '@/components/form/Button'
+import { CardSubmitButton} from '@/components/form/Button'
 
 type FavoriteToggleFormProps = {
   productId: string

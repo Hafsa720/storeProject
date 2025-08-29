@@ -1,9 +1,7 @@
 import EmptyList from '@/components/global/EmptyList'
 import { fetchAdminProducts } from '@/utils/actions'
 import Link from 'next/link'
-import FormContainer from '@/components/form/FormContainer'
-import { IconButton } from '@/components/form/Button'
-import { deleteProductAction } from '@/utils/actions'
+
 import { formatCurrency } from '@/utils/format'
 import {
   Table,
@@ -17,7 +15,7 @@ import {
 
 async function ItemsPage() {
   const items = await fetchAdminProducts()
-  //const items: any = []
+
   if (items.length === 0) return <EmptyList />
   return (
     <section>
@@ -34,7 +32,7 @@ async function ItemsPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {items?.map((item: any) => {
+          {items?.map((item) => {
             const { id: productId, name, company, price } = item
             return (
               <TableRow key={productId}>

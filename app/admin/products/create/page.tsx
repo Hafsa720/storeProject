@@ -10,7 +10,7 @@ import { CreateProductAction } from '@/utils/actions'
 import PriceInput from '@/components/form/PriceInput'
 import CheckBoxInput from '@/components/form/CheckBoxInput'
 import { SubmitButton } from '@/components/form/Button'
-import { log } from 'console'
+
 function CreateProductPage() {
   const name = faker.commerce.productName()
   const company = faker.company.name()
