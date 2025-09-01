@@ -2201,7 +2201,7 @@ export type CartState = {
 
 FormContainer.tsx
 
-```tsx
+````tsx
 'use client'
 
 import { useFormState } from 'react-dom'
@@ -2245,7 +2245,7 @@ export const createProductAction = async (
 ): Promise<{ message: string }> => {
   return { message: 'product created' }
 }
-```
+````
 
 page.tsx
 
@@ -5334,33 +5334,31 @@ export const GET = async (req: NextRequest) => {
 }
 ```
 
-
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
 const isPublicRoute = createRouteMatcher(['/', '/products(.*)', '/about','sign-in'])
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isPublicRoute(req)) {
-    return NextResponse.next()
-  }
+if (isPublicRoute(req)) {
+return NextResponse.next()
+}
 
-  const { userId } = await auth()
+const { userId } = await auth()
 console.log('userId:',userId);
 
-  if (!userId) {
-    // Redirect to custom sign-in page
-    const signInUrl = new URL('/sign-in', req.url)
-    return NextResponse.redirect(signInUrl)
-  }
+if (!userId) {
+// Redirect to custom sign-in page
+const signInUrl = new URL('/sign-in', req.url)
+return NextResponse.redirect(signInUrl)
+}
 
-  return NextResponse.next()
+return NextResponse.next()
 })
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 }
-
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -5374,26 +5372,26 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'next storeFront',
-  description: 'A nifty storefront built with Next.js',
+title: 'next storeFront',
+description: 'A nifty storefront built with Next.js',
 }
 
 export default function RootLayout({
-  children,
+children,
 }: Readonly<{
-  children: React.ReactNode
+children: React.ReactNode
 }>) {
-  return (
-    <ClerkProvider>
-      <html lang='en' suppressHydrationWarning>
-        <body className={inter.className}>
-          <ThemeProvider>
-            <Toaster />
-            <Navbar />
-            <Container className='flex flex-col'>{children}</Container>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  )
+return (
+<ClerkProvider>
+<html lang='en' suppressHydrationWarning>
+<body className={inter.className}>
+<ThemeProvider>
+<Toaster />
+<Navbar />
+<Container className='flex flex-col'>{children}</Container>
+</ThemeProvider>
+</body>
+</html>
+</ClerkProvider>
+)
 }
