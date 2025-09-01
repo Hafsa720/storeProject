@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { Card, CardContent } from '../ui/card'
 import FavouriteToggleButton from './FavouriteToggleButton'
 function ProductsGrid({ products }: { products: Product[] }) {
-console.log(products)
   return (
     <div className='pt-12 grid gap-34 md:grid-cols-2 lg:grid-cols-3 '>
       {products.map((product) => {

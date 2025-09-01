@@ -6,7 +6,12 @@ import type { Prisma } from '@prisma/client'
 import db from '@/utils/db'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
-import { imageSchema, productSchema, validateWithZodSchema } from './schemas'
+import {
+  imageSchema,
+  productSchema,
+  validateWithZodSchema,
+  reviewSchema,
+} from './schemas'
 import { deleteImage, uploadImage } from './suphabase'
 import { revalidatePath } from 'next/cache'
 
@@ -217,3 +222,90 @@ export const fetchFavoriteProducts = async (): Promise<Product[]> => {
   })
   return favorites.map((fav) => fav.product)
 }
+export const createReviewAction = async (
+  productId: string,
+  formData: FormData
+) => {
+  console.log(productId, formData)
+  try {
+    const user = await getAuthUser()
+    const rawData = Object.fromEntries(formData)
+
+    const validatedFields = validateWithZodSchema(reviewSchema, rawData)
+    if ('error' in validatedFields) return { message: validatedFields.error }
+
+    await db.review.create({
+      data: { ...validatedFields, clerkId: user.id },
+    })
+
+    revalidatePath(`/products/${validatedFields.productId}`)
+    return { message: 'Review submitted successfully' }
+  } catch (error) {
+    console.log('error : ', error)
+    return renderError(error)
+  }
+}
+
+export const fetchProductReviews = async (productId: string) => {
+  const reviews = await db.review.findMany({
+    where: {
+      productId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return reviews
+}
+
+export async function fetchProductRating(productId: string) {
+  const result = await db.review.aggregate({
+    where: { productId },
+    _avg: { rating: true },
+  })
+
+  // Safe access: if no reviews exist, return 0 (or null)
+  const avgRating = result?._avg?.rating ?? 0
+
+  return avgRating
+}
+
+export const fetchProductReviewsByUser = async () => {
+  const user = await getAuthUser()
+  const reviews = await db.review.findMany({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      product: {
+        select: {
+          image: true,
+          name: true,
+        },
+      },
+    },
+  })
+  return reviews
+}
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
+  const { reviewId } = prevState
+  const user = await getAuthUser()
+
+  try {
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        clerkId: user.id,
+      },
+    })
+    revalidatePath('/reviews')
+    return { message: 'review deleted successfully' }
+  } catch (error) {
+    return renderError(error)
+  }
+}
+export const findExistingReview = async () => {}

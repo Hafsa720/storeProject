@@ -7,6 +7,8 @@ import FavouriteToggleButton from '@/components/product/FavouriteToggleButton'
 import AddToCart from '@/components/single-product/AddToCart'
 import  Image  from 'next/image'
 import ProductsRating from '@/components/single-product/ProductsRating'
+import ProductReviews from '@/components/reviews/ProductReviews'
+import SubmitReview from '@/components/reviews/SubmitReview'
  async function SingleProductPage({params}: {params: {id: string}}) {
   const product = await FetchSingleProduct(params.id)
   const { name, description, price, image, company } = product
@@ -39,6 +41,8 @@ import ProductsRating from '@/components/single-product/ProductsRating'
          <AddToCart productId={params.id} />
         </div>
       </div>
+      <ProductReviews productId={params.id}/>
+      <SubmitReview productId={params.id}/>
     </section>
   )
 }
