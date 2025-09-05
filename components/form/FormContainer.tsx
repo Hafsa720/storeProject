@@ -17,7 +17,6 @@ function FormContainer({
 }) {
   const test = useActionState(action, initialState)
 
-  console.log(test)
   const [state, formAction] = test
   const { toast } = useToaster()
   useEffect(() => {

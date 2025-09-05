@@ -13,7 +13,10 @@ function CartItemList({ cartItems }: { cartItems: CartItemWithProduct[] }) {
         const { id, amount } = cartItem
         const { image, name, price, id: productId } = cartItem.product
         return (
-          <Card key={id} className='grid  gap-x-4  p-5 border-b lg:grid-cols-4'>
+          <Card
+            key={id}
+            className='grid  gap-x-4  mb-5 p-5 border-b lg:grid-cols-4'
+          >
             <FirstColumn image={image} name={name} />
             <SecondColumn
               name={name}
