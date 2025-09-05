@@ -5,12 +5,20 @@ import { FetchSingleProduct } from '@/utils/actions'
 import { formatCurrency } from '@/utils/format'
 import FavouriteToggleButton from '@/components/product/FavouriteToggleButton'
 import AddToCart from '@/components/single-product/AddToCart'
-import  Image  from 'next/image'
+import Image from 'next/image'
 import ProductsRating from '@/components/single-product/ProductsRating'
+
 import ProductReviews from '@/components/reviews/ProductReviews'
 import SubmitReview from '@/components/reviews/SubmitReview'
- async function SingleProductPage({params}: {params: {id: string}}) {
-  const product = await FetchSingleProduct(params.id)
+
+async function SingleProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const resolvedParams = await params
+  const product = await FetchSingleProduct(resolvedParams.id)
+
   const { name, description, price, image, company } = product
   const dollarAmount = formatCurrency(price)
   return (
@@ -30,19 +38,21 @@ import SubmitReview from '@/components/reviews/SubmitReview'
         </div>
         {/*IMAGE SECOND COL*/}
         <div>
-         <div className='flex items-center gap-x-8'>
-          <h1 className='text-3xl capitalize font-bold'>{name}</h1>
-          <FavouriteToggleButton productsId={params.id}/>
-         </div>
-         <ProductsRating productId={params.id} />
-         <h4 className='text-xl mt-2'>{company}</h4>
-         <p className='mt-1 text-md bg-muted inline-block rounded'>{dollarAmount}</p>
-         <p className='mt-6 leading-8 text-muted-foreground'>{description}</p>
-         <AddToCart productId={params.id} />
+          <div className='flex items-center gap-x-8'>
+            <h1 className='text-3xl capitalize font-bold'>{name}</h1>
+            <FavouriteToggleButton productsId={resolvedParams.id} />
+          </div>
+          <ProductsRating />
+          <h4 className='text-xl mt-2'>{company}</h4>
+          <p className='mt-1 text-md bg-muted inline-block rounded'>
+            {dollarAmount}
+          </p>
+          <p className='mt-6 leading-8 text-muted-foreground'>{description}</p>
+          <AddToCart />
         </div>
       </div>
-      <ProductReviews productId={params.id}/>
-      <SubmitReview productId={params.id}/>
+      <ProductReviews productId={params.id} />
+      <SubmitReview productId={params.id} />
     </section>
   )
 }
