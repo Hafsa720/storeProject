@@ -28,3 +28,8 @@ export type Product = {
   company: string
   // Add other fields as needed
 }
+import { Prisma } from '@prisma/client'
+
+export type CartItemWithProduct = Prisma.CartItemGetPayload<{
+  include: { product: true }
+}>

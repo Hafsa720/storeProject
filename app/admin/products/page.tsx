@@ -1,5 +1,5 @@
 import EmptyList from '@/components/global/EmptyList'
-import { fetchAdminProducts } from '@/utils/actions'
+import { deleteProductAction, fetchAdminProducts } from '@/utils/actions'
 import Link from 'next/link'
 
 import { formatCurrency } from '@/utils/format'
@@ -12,6 +12,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { IconButton } from '@/components/form/Button'
+import FormContainer from '@/components/form/FormContainer'
 
 async function ItemsPage() {
   const items = await fetchAdminProducts()
@@ -47,7 +49,12 @@ async function ItemsPage() {
                 <TableCell>{company}</TableCell>
                 <TableCell>{formatCurrency(price)}</TableCell>
 
-                <TableCell className='flex items-center gap-x-2'></TableCell>
+                <TableCell className='flex items-center gap-x-2'>
+                  <Link href={`/admin/products/${productId}/edit`}>
+                    <IconButton actionType='edit' />
+                  </Link>
+                  <DeleteProduct productId={productId} />
+                </TableCell>
               </TableRow>
             )
           })}
@@ -56,5 +63,12 @@ async function ItemsPage() {
     </section>
   )
 }
-
+function DeleteProduct({ productId }: { productId: string }) {
+  const deleteProduct = deleteProductAction.bind(null, { productId })
+  return (
+    <FormContainer action={deleteProduct}>
+      <IconButton actionType='delete' />
+    </FormContainer>
+  )
+}
 export default ItemsPage
