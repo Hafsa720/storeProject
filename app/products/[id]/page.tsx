@@ -8,8 +8,9 @@ import ProductsRating from '@/components/single-product/ProductsRating'
 import { auth } from '@clerk/nextjs/server'
 import ProductReviews from '@/components/reviews/ProductReviews'
 import SubmitReview from '@/components/reviews/SubmitReview'
-async function SingleProductPage({ params }: { params: { id: string } }) {
-  const product = await FetchSingleProduct(params.id)
+async function SingleProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const product = await FetchSingleProduct(id)
   const { name, image, company, description, price } = product
   const dollarsAmount = formatCurrency(price)
   const { userId } = await auth()
@@ -36,20 +37,20 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
         <div>
           <div className='flex gap-x-8 items-center'>
             <h1 className='capitalize text-3xl font-bold'>{name}</h1>
-            <FavouriteToggleButton productsId={params.id} />
+            <FavouriteToggleButton productsId={id} />
           </div>
-          <ProductsRating productId={params.id} />
+          <ProductsRating productId={id} />
           <h4 className='text-xl mt-2'>{company}</h4>
           <p className='mt-3 text-md bg-muted inline-block p-2 rounded-md'>
             {dollarsAmount}
           </p>
           <p className='mt-6 leading-8 text-muted-foreground'>{description}</p>
-          <AddToCart productId={params.id} />
+          <AddToCart productId={id} />
         </div>
       </div>
-      <ProductReviews productId={params.id} />
+      <ProductReviews productId={id} />
 
-      {reviewDoesNotExist && <SubmitReview productId={params.id} />}
+      {reviewDoesNotExist && <SubmitReview productId={id} />}
     </section>
   )
 }

@@ -5,7 +5,8 @@ function Rating({ rating }: { rating: number }) {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1)
   return (
     <div className='flex items-center gap-x-1'>
-      {stars.map((isFilled, i) => {
+      {stars.map((star, i) => {
+        const isFilled = star <= rating
         const classname = `w-3 h-3 ${
           isFilled ? 'text-primary' : 'text-grey-400'
         }`

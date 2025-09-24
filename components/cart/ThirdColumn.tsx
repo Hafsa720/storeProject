@@ -6,7 +6,7 @@ import FormContainer from '../form/FormContainer'
 import { SubmitButton } from '../form/Button'
 import { removeCartItemAction, updateCartItemAction } from '@/utils/actions'
 import { useToaster } from '../ui/sonner'
-import { set } from 'zod'
+
 
 type Props = {
   quantity: number
@@ -33,7 +33,7 @@ function ThirdColumn({ quantity, id }: Props) {
         amount={amount}
         setAmount={handleChange}
         mode={Mode.CartItem}
-        isLoading={false}
+        isLoading={isLoading}
       />
       <FormContainer action={removeCartItemAction}>
         <input type='hidden' name='id' value={id} />
